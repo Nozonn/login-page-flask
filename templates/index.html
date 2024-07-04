@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+</head>
+<body>
+    
+    <header>
+
+        <div id="content">
+            <h1>Login Page</h1>
+            
+            <div id="methodConn">
+                <button class="select">Log in</button>
+                <button class="">Sign in</button>
+            </div>
+        </div>
+    </header>
+
+    
+
+    <section id="loginSection">
+        <form action="{{ url_for('login') }}" method="post" id="login">
+            <h2>Connexion</h2>
+            
+            <div class="inputLab">
+                <label for="usernameLogin">Nom d'utilisateur</label>
+                <input type="text" name="username" id="usernameLogin" autofocus autocomplete="off">
+                <div class="usernameMissing">
+                    <p class="errorColor">* Nom d'utilisateur non renseigné</p>
+                </div>
+            </div>
+
+
+            <div class="inputLab">
+                <label for="passwordLogin">Mot de passe</label>
+                <input type="password" name="password" id="passwordLogin">
+                <div class="passwordMissing">
+                    <p class="errorColor">* Mot de passe non renseigné</p>
+                </div>
+            </div>
+            
+            
+            <div class="btnContent">
+                <button type="submit">Valider</button>
+            </div>
+
+            <div class="loginError">
+                <p class="errorColor">Nom d'utilisateur et/ou mdp incorrect(s)</p>
+            </div>
+    
+        </form>
+        
+    </section>
+
+    <section id="signinSection">
+        <form action="{{ url_for('signin') }}" method="post" id="signin">
+            <h2>Inscription</h2>
+            
+            <div class="inputLab">
+                <label for="usernameSignin">Nom d'utilisateur</label>
+                <input type="text" name="username" id="usernameSignin" autocomplete="off" autofocus>
+                <div class="usernameSignMissing">
+                    <p class="errorColor">* Nom d'utilisateur non renseigné</p>
+                </div>
+
+                <div class="usernameAlreadyUsed">
+                    <p class="errorColor">* Nom d'utilisateur déjà utilisé</p>
+                </div>
+            </div>
+            
+            <div class="inputLab">
+                <label for="emailSignin">Email</label>
+                <input type="email" name="email" id="emailSignin" placeholer="abc123@domain.com">
+                <div class="emailMissing">
+                    <p class="errorColor">* Adresse mail non renseigné</p>
+                </div>
+            </div>
+            
+            <div class="inputLab">
+                <label for="ageSignin">Âge</label>
+                <input type="number" name="age" min="0" max="120" id="ageSignin">
+                <div class="ageMissing">
+                    <p class="errorColor">* Âge non renseigné</p>
+                </div>
+            </div>
+            
+            <div class="inputLab">
+                <label for="passwordSignin">Mot de passe</label>
+                <input type="password" name="password" id="passwordSignin">
+                <div class="passwordSignMissing">
+                    <p class="errorColor">* Mot de passe non renseigné</p>
+                </div>
+            </div>
+            
+            <div class="btnContent">
+                <button type="submit">Valider</button>
+            </div>
+
+        </form>
+
+    </section>
+
+
+    {% if usernameUsed %}
+    
+    <script>
+        document.getElementById("methodConn").children[1].setAttribute("class", "select");
+        document.getElementById("methodConn").children[0].setAttribute("class", "");
+        
+        document.getElementById("signinSection").style.display = "flex";
+        document.getElementById("loginSection").style.display = "none";
+        document.querySelector(".usernameAlreadyUsed").style.display="block";
+    </script>
+        
+    
+    {% else %}
+
+    <script>
+        document.getElementById("signinSection").style.display = "none";
+        document.getElementById("loginSection").style.display = "flex";
+
+    </script>
+    
+
+    {% endif %}
+
+    
+
+    {% if error %}
+    <script>
+        document.querySelector(".loginError").style.display = "block"
+    </script>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

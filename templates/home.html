@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Connected !
+{% endblock %}
+
+{% block content %}
+
+<header>
+    <h1>BIENVENU</h1>
+
+    <h2>{{ name }}</h2>
+    
+</header>
+
+<form action="/" method="post"><button type="submit">Déconnexion</button></form>
+<form action="{{ url_for('deleteAccount', name=name ) }}" method="POST">
+    <button type="submit" onclick="return confirm('Confirmation de Suppression de compte')">Suppression du compte</button>
+
+
+</form>
+
+{% endblock %}
